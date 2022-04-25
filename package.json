@@ -1,0 +1,32 @@
+{
+  "name": "image-optimist",
+  "version": "1.0.12",
+  "description": "A utility for processing and converting images to the requirements of the modern web.",
+  "private": false,
+  "main": "index.js",
+  "author": {
+    "name": "Aslan Baryshnikov",
+    "email": "aslanbaryshnikov@gmail.com"
+  },
+  "dependencies": {
+    "filesize": "^8.0.7",
+    "imagemin": "7.0.1",
+    "imagemin-gifsicle": "7.0.0",
+    "imagemin-mozjpeg": "9.0.0",
+    "imagemin-pngquant": "9.0.2",
+    "imagemin-svgo": "9.0.0",
+    "imagemin-webp": "5.1.0"
+  },
+  "keywords": [
+    "image",
+    "compress",
+    "processing",
+    "jpeg",
+    "jpg",
+    "png",
+    "webp",
+    "gif",
+    "svg"
+  ],
+  "license": "MIT"
+}
