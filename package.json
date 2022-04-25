@@ -1,12 +1,16 @@
 {
   "name": "image-optimist",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "A utility for processing and converting images to the requirements of the modern web.",
   "private": false,
   "main": "index.js",
   "author": {
     "name": "Aslan Baryshnikov",
     "email": "aslanbaryshnikov@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aslanbaryshnikov/image-optimist.git"
   },
   "dependencies": {
     "filesize": "^8.0.7",
@@ -16,6 +20,11 @@
     "imagemin-pngquant": "9.0.2",
     "imagemin-svgo": "9.0.0",
     "imagemin-webp": "5.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.14.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
   },
   "keywords": [
     "image",
