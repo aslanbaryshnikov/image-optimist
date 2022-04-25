@@ -2,6 +2,12 @@
 
 A utility for processing and converting images to the requirements of the modern web.
 
+## Features
+
+- Recursive directory optimization
+- Keeping the original directory hierarchy
+- Flexible behavior customization
+
 ## Install
 
 ```shell
@@ -44,6 +50,29 @@ Keep in mind that the subfolders will be included in the processing and the outp
 Type: `String`
 
 Set the destination folder. The folder does not need to be empty, but images with the same name will be overwritten.
+
+##### smartMode?
+
+Type: `Boolean`<br>
+Default `true`
+
+If true, moves the file if there is no file with the same name in the destination folder, or if the processed file is smaller.
+
+##### overwriteMode?
+
+Type: `Boolean`<br>
+Default `false`
+
+If true, only existing files in the destination folder will be overwritten. If your destination folder is empty, there will be no changes (because nothing to update). Only available when smartMode is enabled.
+
+##### ignoreDestinationFiles?
+
+Type: `Boolean`<br>
+Default `false`
+
+If true, disables checking that the source file and the file in the destination folder do not match. True is recommended only if you don't care about files in the destination folder.
+
+Note: In most cases, you should replace an obsolete file with a more recent one to avoid erroneous overwriting.
 
 ##### mask?
 

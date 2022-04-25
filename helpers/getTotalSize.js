@@ -1,5 +1,5 @@
-const fs = require('fs');
 const getAllFiles = require('./getAllFiles');
+const getFileSize = require('./getFileSize');
 
 const getTotalSize = (directoryPath) => {
   const arrayOfFiles = getAllFiles(directoryPath);
@@ -7,7 +7,7 @@ const getTotalSize = (directoryPath) => {
   let totalSize = 0;
 
   arrayOfFiles.forEach((filePath) => {
-    totalSize += fs.statSync(filePath).size;
+    totalSize += getFileSize(filePath);
   });
 
   return totalSize;
