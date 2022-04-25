@@ -65,7 +65,7 @@ Default `false`
 
 If true, only existing files in the destination folder will be overwritten. If your destination folder is empty, there will be no changes (because nothing to update). Only available when smartMode is enabled.
 
-##### ignoreDestinationFiles?
+##### ignoreConflicts?
 
 Type: `Boolean`<br>
 Default `false`

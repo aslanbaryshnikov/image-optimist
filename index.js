@@ -25,7 +25,7 @@ const imageOptimist = async (config) => {
     destinationPath: null,
     smartMode: true,
     overwriteMode: false,
-    ignoreDestinationFiles: false,
+    ignoreConflicts: false,
     mask: '*.{jpg,jpeg,png,svg,gif}',
     webp: [
       imageminWebp({
@@ -120,7 +120,7 @@ const imageOptimist = async (config) => {
             !candidateIsExists
               || !sourceFileIsExists
               || candidateSize === sourceFileSize
-              || c.ignoreDestinationFiles
+              || c.ignoreConflicts
           ) {
             // eslint-disable-next-line no-nested-ternary
             if (candidateIsExists ? tmpFileSize < candidateSize : true) {
@@ -134,7 +134,7 @@ const imageOptimist = async (config) => {
             console.warn(`Conflict: ${sourceFile} and ${candidate}\nThe source file and the file in the`
                 + ' destination folder are not the same. You should replace an'
                 + ' obsolete file with a more recent one to avoid erroneous overwriting.'
-                + ' You can set ignoreDestinationFiles to true if you do not care about'
+                + ' You can set ignoreConflicts to true if you do not care about'
                 + ' files in the destination folder.');
           }
         } else {
