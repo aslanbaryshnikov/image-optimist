@@ -41,9 +41,8 @@ const imageOptimist = async (config) => {
       imageminPngquant({
         speed: 4,
         strip: true,
-        quality: [0.8, 1],
-        dithering: false,
-        verbose: true,
+        quality: [0.9, 1],
+        dithering: 1,
       }),
       imageminSvgo(),
       imageminGifsicle({
@@ -62,9 +61,10 @@ const imageOptimist = async (config) => {
     return;
   }
 
-  const initialDirSize = getTotalSize(c.sourcePath);
-
   let tmpDir;
+  let initialDirSize = c.smartMode ? 0 : getTotalSize(c.sourcePath);
+  let finalDirSize = 0;
+  let conflictCount = 0;
   try {
     const inputDirectories = getAllDirectories(c.sourcePath);
 
@@ -125,12 +125,15 @@ const imageOptimist = async (config) => {
             // eslint-disable-next-line no-nested-ternary
             if (candidateIsExists ? tmpFileSize < candidateSize : true) {
               moveFile(tmpFile, candidate);
+              if (sourceFileIsExists) initialDirSize += sourceFileSize;
+              finalDirSize += tmpFileSize;
               if (candidateIsExists) console.log(`Updated: ${candidateRelative}`);
               else console.log(`Created: ${candidateRelative}`);
             } else {
               console.log(`Not updated (already has optimal size): ${candidateRelative}`);
             }
           } else {
+            conflictCount += 1;
             console.warn(`Conflict: ${sourceFile} and ${candidate}\nThe source file and the file in the`
                 + ' destination folder are not the same. You should replace an'
                 + ' obsolete file with a more recent one to avoid erroneous overwriting.'
@@ -143,12 +146,16 @@ const imageOptimist = async (config) => {
       }
     }
 
-    const finalDirSize = getTotalSize(c.destinationPath);
+    if (!c.smartMode) finalDirSize = getTotalSize(c.destinationPath);
     const diffDirSize = initialDirSize - finalDirSize;
-
-    console.log(`Initial: ${convertBytes(initialDirSize)}`);
-    console.log(`Final${c.webp ? ' + WebP' : ''}: ${convertBytes(finalDirSize)}`);
+    console.log(`Was available for processing: ${convertBytes(initialDirSize)}`);
+    console.log(`After processing: ${convertBytes(finalDirSize)}`);
     console.log(`Diff: ${convertBytes(diffDirSize)}`);
+    if (c.smartMode) {
+      console.log(`Source size: ${convertBytes(getTotalSize(c.sourcePath))}`);
+      console.log(`Destination size: ${convertBytes(getTotalSize(c.destinationPath))}`);
+    }
+    if (conflictCount > 0) console.log(`Conflicts: ${conflictCount}`);
     console.timeEnd(PROCESSING_TIME);
     console.log(`${PACKAGE_NAME} finished`);
   } catch (e) {

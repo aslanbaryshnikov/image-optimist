@@ -1,6 +1,6 @@
 {
   "name": "image-optimist",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "A utility for processing and converting images to the requirements of the modern web.",
   "private": false,
   "main": "index.js",
